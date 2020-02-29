@@ -1,0 +1,15 @@
+NEW ORDER DETAILS
+	Balloon:
+	Color: RED
+	Material: MYLAR
+	Quantity: 4
+
+Cake:
+	Flavor: CHOCOLATE
+	Frosting Flavor: CHOCOLATE
+	Shape: CIRCLE
+	Size: LARGE
+	Color: BROWN
+
+
+END ORDER

@@ -3,10 +3,49 @@
  */
 package scrap.heap.refactor;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+
+import org.junit.Before;
 import org.junit.Test;
-import static org.junit.Assert.*;
+
+import scrap.heap.refactor.order.Order;
+import scrap.heap.refactor.order.OrderItem;
+import scrap.heap.refactor.order.item.balloon.Balloon;
+import scrap.heap.refactor.order.item.balloon.BalloonColor;
+import scrap.heap.refactor.order.item.balloon.Material;
+import scrap.heap.refactor.order.item.cake.Cake;
+import scrap.heap.refactor.order.item.cake.CakeColor;
+import scrap.heap.refactor.order.item.cake.Flavor;
+import scrap.heap.refactor.order.item.cake.FrostingFlavor;
+import scrap.heap.refactor.order.item.cake.Shape;
+import scrap.heap.refactor.order.item.cake.Size;
 
 public class AppTest {
+
+    private App orderManager;
+    OrderItem balloon;
+    OrderItem cake;
+
+    @Before
+    public void before() {
+        orderManager = new App();
+        balloon = new Balloon.Builder().setBalloonColor(BalloonColor.RED).setMaterial(Material.MYLAR)
+                .setQuantity(4).build();
+        cake = new Cake.Builder().setFlavor(Flavor.CHOCOLATE).setFrostingFlavor(FrostingFlavor.CHOCOLATE)
+                .setShape(Shape.CIRCLE).setSize(Size.LARGE).setCakeColor(CakeColor.BROWN).build();
+    }
+
+    @Test
+    public void testPlaceOrder() {
+        assertNotNull(orderManager);
+        assertEquals(0, orderManager.getOrderList().size());
+        Order order = orderManager.placeOrder(balloon, cake);
+        assertNotNull(order);
+        assertEquals(2, order.getOrderItems().size());
+        assertEquals(1, orderManager.getOrderList().size());
+    }
+
     @Test public void testAppHasAGreeting() {
         App classUnderTest = new App();
         assertNotNull("app should have a greeting", classUnderTest.getGreeting());
